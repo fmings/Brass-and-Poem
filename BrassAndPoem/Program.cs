@@ -102,7 +102,11 @@ void DisplayMenu()
 
 void DisplayAllProducts(List<Product> products, List<ProductType> productTypes)
 {
-    throw new NotImplementedException();
+    for (int i = 0; i < products.Count; i++)
+    {
+        var productType = productTypes.FirstOrDefault(p => p.Id == products[i].ProductTypeId);
+        Console.WriteLine($"{i + 1}. Product: {products[i].Name}, Type: {productType?.Title}, Price: ${products[i].Price}");
+    }
 }
 
 void DeleteProduct(List<Product> products, List<ProductType> productTypes)
