@@ -156,7 +156,47 @@ void AddProduct(List<Product> products, List<ProductType> productTypes)
 
 void UpdateProduct(List<Product> products, List<ProductType> productTypes)
 {
-    throw new NotImplementedException();
+    DisplayAllProducts(products, productTypes);
+    Console.WriteLine("Please enter the number of the product you would like to update:");
+    int selectedProduct;
+    if (int.TryParse(Console.ReadLine(), out selectedProduct) && selectedProduct > 0 && selectedProduct <= products.Count)
+    {
+        var product = products[selectedProduct - 1];
+        var productTypeName = productTypes.FirstOrDefault(p => p.Id == product.ProductTypeId);
+        Console.WriteLine($@"Here are the current details of the product you chose:
+                                Name: {product.Name}
+                                Price: {product.Price}
+                                Product Type: {productTypeName?.Title}");
+        Console.WriteLine("Enter the new product name (leave blank to keep current):");
+        string newName = Console.ReadLine();
+        if (!string.IsNullOrEmpty(newName) )
+        {
+            product.Name = newName;
+        }
+
+        Console.WriteLine("Enter the new product price (leave blank to keep current):");
+        string newPriceInput = Console.ReadLine();
+        if (decimal.TryParse(newPriceInput, out decimal newPrice))
+        {
+            product.Price = newPrice;
+        }
+
+        Console.WriteLine("Select a new product type (leave blank to keep current):");
+        foreach (ProductType productType in productTypes)
+        {
+            Console.WriteLine($"{productType.Id}. {productType.Title}");
+        }
+        string newProductTypeIdInput = Console.ReadLine();
+        if (int.TryParse(newProductTypeIdInput, out int newProductTypeId) && productTypes.Any(pt => pt.Id == newProductTypeId))
+        {
+            product.ProductTypeId = newProductTypeId;
+        }
+        Console.WriteLine("Product successfully updated!");
+    }
+    else
+    {
+        Console.WriteLine("Product not found.");
+    }
 }
 
 // don't move or change this!
