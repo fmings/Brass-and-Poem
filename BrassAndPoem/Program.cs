@@ -111,7 +111,20 @@ void DisplayAllProducts(List<Product> products, List<ProductType> productTypes)
 
 void DeleteProduct(List<Product> products, List<ProductType> productTypes)
 {
-    throw new NotImplementedException();
+    DisplayAllProducts(products, productTypes);
+    Console.WriteLine("Please enter the number of which product you would like to remove:");
+    int selectedProduct;
+    if(int.TryParse(Console.ReadLine(), out selectedProduct) && selectedProduct > 0 && selectedProduct <= products.Count)
+    {
+        products.RemoveAt(selectedProduct - 1);
+    }
+    else
+    {
+        Console.WriteLine("Invalid entry. Please enter a valid number.");
+    }
+    Console.WriteLine("Remaining Product:");
+    DisplayAllProducts(products, productTypes);
+
 }
 
 void AddProduct(List<Product> products, List<ProductType> productTypes)
