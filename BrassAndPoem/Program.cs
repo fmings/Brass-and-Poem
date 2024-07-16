@@ -53,11 +53,51 @@ List<ProductType> productTypes = new List<ProductType>()
 
 //put your greeting here
 
+string greeting = "Welcome to Brass and Poem! We serve your creative needs.";
+Console.WriteLine(greeting);
+DisplayMenu();
+
+
 //implement your loop here
 
 void DisplayMenu()
 {
-    throw new NotImplementedException();
+    string choice = null;
+    while (choice != "5")
+    {
+        Console.WriteLine(@"Please select an option:
+                            1. Display all products
+                            2. Delete a product
+                            3. Add a new product
+                            4. Update product properties
+                            5. Exit");
+
+        choice = Console.ReadLine();
+        if (choice == "1")
+        {
+            DisplayAllProducts(products, productTypes);
+        }
+        else if (choice == "2")
+        {
+            DeleteProduct(products, productTypes);
+        }
+        else if (choice == "3")
+        {
+            AddProduct(products, productTypes);
+        }
+        else if (choice == "4")
+        {
+            UpdateProduct(products, productTypes);
+        }
+        else if (choice == "5")
+        {
+            Console.WriteLine("Exit Program");
+        }
+        else
+        {
+            Console.WriteLine("Invalid entry. Please enter a valid number.");
+        }
+    }
 }
 
 void DisplayAllProducts(List<Product> products, List<ProductType> productTypes)
